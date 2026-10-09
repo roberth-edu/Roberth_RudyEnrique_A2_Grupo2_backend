@@ -22,6 +22,10 @@ public class ClientesService {
     {
         try
         {
+            if (repo.existsByEmail(dto.getEmail()))
+            {
+                throw  new IllegalArgumentException("El correo ya esta registrado");
+            }
             ClientesEntity entity = convertirEntity(dto);
             ClientesEntity entitySave = repo.save(entity);
             return convertirDTO(entitySave);
@@ -100,4 +104,6 @@ public class ClientesService {
             throw e;
         }
     }
+
+
 }
